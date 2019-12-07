@@ -7,60 +7,60 @@ import (
 
 var doc = map[string]string{
 	"base": `
-	\\documentclass[11pt,a4paper,roman]{moderncv}        
-	\\moderncvstyle{banking}     
-	\\moderncvcolor{blue}               
-	\\nopagenumbers{}                                  
-	\\usepackage[utf8]{inputenc}
-	\\usepackage{fontawesome}
-	\\usepackage{tabularx}
-	\\usepackage{ragged2e}
-	\\usepackage[scale=0.8]{geometry}
-	\\usepackage{multicol}
-	\\usepackage{import}
-	
-	
-	\\name{@firstName}{@lastName}
-	
-	\address{@address}{}{}
-	  
-	\newcommand*{\customcventry}[7][.25em]{
-	  \begin{tabular}{@{}l} 
-		{\bfseries #4}
-	  \end{tabular}
-	  \hfill
-	  \begin{tabular}{l@{}}
-		 {\bfseries #5}
-	  \end{tabular} \\
-	  \begin{tabular}{@{}l} 
-		{\itshape #3}
-	  \end{tabular}
-	  \hfill
-	  \begin{tabular}{l@{}}
-		 {\itshape #2}
-	  \end{tabular}
-	  \ifx&#7&
-	  \else{\\
-		\begin{minipage}{\maincolumnwidth}
-		  \small#7
-		\end{minipage}}\fi
-	  \par\addvspace{#1}}
-	
-	\newcommand*{\customcvproject}[4][.25em]{
-	  \begin{tabular}{@{}l} 
-		{\bfseries #2}
-	  \end{tabular}
-	  \begin{tabular}{l@{}}
-		 {\itshape #3}
-	  \end{tabular}
-	  \ifx&#4&
-	  \else{\\
-		\begin{minipage}{\maincolumnwidth}
-		  \small#4
-		\end{minipage}}\fi
-	  \par\addvspace{#1}}
-	
-	\setlength{\tabcolsep}{12pt}
+	\documentclass[11pt,a4paper,roman]{moderncv}        
+\moderncvstyle{banking}     
+\moderncvcolor{blue}               
+\nopagenumbers{}                                  
+\usepackage[utf8]{inputenc}
+\usepackage{fontawesome}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage[scale=0.8]{geometry}
+\usepackage{multicol}
+\usepackage{import}
+
+
+\name{@firstName}{@lastName}
+
+\address{@address}{}{}
+  
+\newcommand*{\customcventry}[7][.25em]{
+  \begin{tabular}{@{}l} 
+    {\bfseries #4}
+  \end{tabular}
+  \hfill
+  \begin{tabular}{l@{}}
+     {\bfseries #5}
+  \end{tabular} \\
+  \begin{tabular}{@{}l} 
+    {\itshape #3}
+  \end{tabular}
+  \hfill
+  \begin{tabular}{l@{}}
+     {\itshape #2}
+  \end{tabular}
+  \ifx&#7&
+  \else{\\
+    \begin{minipage}{\maincolumnwidth}
+      \small#7
+    \end{minipage}}\fi
+  \par\addvspace{#1}}
+
+\newcommand*{\customcvproject}[4][.25em]{
+  \begin{tabular}{@{}l} 
+    {\bfseries #2}
+  \end{tabular}
+  \begin{tabular}{l@{}}
+     {\itshape #3}
+  \end{tabular}
+  \ifx&#4&
+  \else{\\
+    \begin{minipage}{\maincolumnwidth}
+      \small#4
+    \end{minipage}}\fi
+  \par\addvspace{#1}}
+
+\setlength{\tabcolsep}{12pt}
 	
 	\begin{document}
 	\makecvtitle
@@ -68,7 +68,7 @@ var doc = map[string]string{
 	
 	\begin{center}
 	\begin{tabular}{ c c c c }
-	\faEnvelopeO\enspace @email & \faGithub\enspace suyashdeshpande &  \faMobile\enspace @phone\\  
+	\faEnvelopeO\enspace @email & @github &  \faMobile\enspace @phone\\  
 	\end{tabular}
 	\end{center}
 		
@@ -88,7 +88,6 @@ var doc = map[string]string{
 	
 	@experiences
 		  
-	}
 	
 	\nocite{*}
 	\bibliographystyle{plain}
@@ -116,6 +115,7 @@ var doc = map[string]string{
 	  }
 	  }
 	  `,
+	"github": `\faGithub\enspace @username`,
 }
 
 //Education represents properties if education
@@ -177,6 +177,9 @@ func generate(form Form) string {
 	// Replace skills in doc
 	ans = strings.Replace(ans, "@skills", form.Skills, 1)
 
+	// Replace github username
+	ans = strings.Replace(ans, "@github", "", 1)
+
 	// Replace education in doc
 	educations := ""
 	for _, ed := range form.Educations {
@@ -206,6 +209,7 @@ func generate(form Form) string {
 		}
 		tempExperience = strings.Replace(tempExperience, "@experienceItems", tempD, 1)
 		experiences += tempExperience
+		// fmt.Println("experiencas das dasdnasd", tempExperience)
 	}
 	ans = strings.Replace(ans, "@experiences", experiences, 1)
 
@@ -226,7 +230,6 @@ func generate(form Form) string {
 		projects += tempProject
 	}
 	ans = strings.Replace(ans, "@projects", projects, 1)
-
 	return ans
 }
 
