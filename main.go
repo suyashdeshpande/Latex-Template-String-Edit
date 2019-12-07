@@ -233,10 +233,10 @@ func generate(form Form) string {
 func main() {
 
 	temp := Form{
-		Name:    "Aniket Singh",
+		Name:    "Suyash Deshpande",
 		Address: "Bhopal",
-		Email:   "aniketsingh0104@gmail.com",
-		Phone:   "9407826614",
+		Email:   "suyash.champ1@gmail.com",
+		Phone:   "9879879877",
 		Skills:  "Python | Javascript",
 		Educations: []Education{
 			Education{
@@ -262,12 +262,12 @@ func main() {
 		},
 		Experieces: []Experience{
 			Experience{
-				Name:        "JP Morgan Chase",
+				Name:        "Appointy",
 				Profile:     "SDE Intern",
-				Location:    "Bombay",
+				Location:    "Bhopal",
 				StartDate:   "1 May 2019",
 				EndDate:     "28 June 2019",
-				Description: []string{"Developed a chatbot in python"},
+				Description: []string{"Developed online scheduling system"},
 			},
 		},
 	}
