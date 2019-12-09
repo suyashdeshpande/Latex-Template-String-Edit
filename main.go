@@ -230,6 +230,7 @@ func generate(form Form) string {
 		projects += tempProject
 	}
 	ans = strings.Replace(ans, "@projects", projects, 1)
+	ans = strings.Replace(ans, "\n", "", -1)
 	return ans
 }
 
